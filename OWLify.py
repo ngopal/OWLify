@@ -87,6 +87,26 @@ class OWL:
         self.doc += stub
         return 0
 
+
+    def assertEquivalentTriple(self, classname, propertyname, propertyvalue, relation):
+        if relation == 'some':
+            relstart = '\t<ObjectSomeValuesFrom>\n'
+            relend = '\t</ObjectSomeValuesFrom>\n'
+        else:
+            relstart = '\t<ObjectAllValuesFrom>\n'
+            relend = '\t</ObjectAllValuesFrom>\n'
+        stub = '<EquivalentClasses>\n'
+        stub += '\t<Class IRI=\"' + self.namespace + '#' + classname + '\"/>\n'
+        stub += relstart
+        stub += '\t\t<ObjectProperty IRI=\"' + self.propurl + '#' + propertyname + '\"/>\n'
+        stub += '\t\t<Class IRI=\"' + self.namespace + '#' + propertyvalue + '\"/>\n'
+        stub += relend
+        stub += '</EquivalentClasses>\n'
+        print stub
+        self.doc += stub
+        return 0
+
+
     def addAnnotation(self, classname, message):
         stub = '<AnnotationAssertion>\n'
         stub += '\t<AnnotationProperty abbreviatedIRI=\"rdfs:comment\"/>'
