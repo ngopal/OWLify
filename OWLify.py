@@ -117,7 +117,7 @@ class OWL:
         self.doc += stub
         return 0
 
-    def writeFile(self):
+    def end(self):
         fileh = open(self.outfile, 'w')
         self.doc += '</Ontology>\n'
         fileh.write(self.doc)
